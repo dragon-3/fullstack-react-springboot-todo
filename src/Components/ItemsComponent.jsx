@@ -25,23 +25,32 @@ class ItemsComponent extends React.Component {
 
     render() {
         return (
-        <table>
-            <thead>
-                <tr>
-                    <tbody>
-                        {
-                            this.state.family.map(
-                                people =>
-                                <tr>
-                                    <td>{people.name}</td>
-                                    <td>{people.email}</td>
-                                </tr>
-                            )
-                        }
-                    </tbody>
-                </tr>
-            </thead>
-        </table>
+            <div>
+                <div >
+                    <table className="table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>email</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {
+                                this.state.family.map(
+                                    people =>
+                                    <tr>
+                                        <td>{people.name}</td>
+                                        <td>{people.email}</td>
+                                    </tr>
+                                )
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+        
         )
     }
 }
