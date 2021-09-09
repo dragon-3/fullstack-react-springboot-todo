@@ -1,26 +1,33 @@
 import React from "react";
 import reactDom from "react-dom";
+import TodoDataService from "../api/TodoDataService";
 
 class ItemsComponent extends React.Component {
 
     constructor() {
         super();
         this.state = {
-            family : [
-               
-                {
-                   name: 'Sean',
-                   email: 'sean@gmail.com'
-                },
-                {
-                    name: 'Bruna',
-                    email: 'Bruna@gmail.com'
-                }
-
-            ]
+            todos : []
         }
-            
         
+        this.refreshTodos = this.refreshTodos.bind(this);
+        
+    }
+
+    componentDidMount() {
+        this.refreshTodos();
+        console.log(this.state);
+    }
+
+    refreshTodos() {
+        TodoDataService.retriveAllTodos()
+        .then (
+            response => {
+                this.setState({
+                    todos: response.data
+                })
+            }
+        )
     }
 
     render() {
@@ -37,11 +44,11 @@ class ItemsComponent extends React.Component {
                         </thead>
                         <tbody>
                             {
-                                this.state.family.map(
-                                    people =>
+                                this.state.todos.map(
+                                    todo =>
                                     <tr>
-                                        <td>{people.name}</td>
-                                        <td>{people.email}</td>
+                                        <td>{todo.name}</td>
+                                        <td>{todo.email}</td>
                                     </tr>
                                 )
                             }
