@@ -1,5 +1,5 @@
 import React from "react";
-import ItemsComponent from "./ItemsComponent";
+import ItemsComponent from "./ItemListComponent";
 
 function HomeComponent() {
 
