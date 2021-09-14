@@ -1,8 +1,10 @@
 import React from "react";
 import reactDom from "react-dom";
 import TodoDataService from "../api/TodoDataService";
+import ItemComponent from "./ItemComponent";
+import { withRouter } from "react-router";
 
-class ItemsComponent extends React.Component {
+class ItemListComponent extends React.Component {
 
     constructor(props) {
         super(props);
@@ -12,6 +14,7 @@ class ItemsComponent extends React.Component {
         
         this.refreshTodos = this.refreshTodos.bind(this);
         this.updateTodoClicked = this.updateTodoClicked.bind(this);
+        this.deleteTodoClicked = this.deleteTodoClicked.bind(this);
         
     }
 
@@ -31,13 +34,28 @@ class ItemsComponent extends React.Component {
         )
     }
 
+    deleteTodoClicked(id) {
+        
+        TodoDataService.deleteTodo(id)
+        .then(
+            response => {
+                
+                this.refreshTodos();
+            }
+        )
+        
+    }
+
     updateTodoClicked(id) {
+        console.log("update" + id)
         this.props.history.push(`/all-todos/${id}`)
     }
 
     render() {
         return (
             <div>
+
+           
                 <div >
                     <table className="table">
                         <thead>
@@ -51,10 +69,11 @@ class ItemsComponent extends React.Component {
                             {
                                 this.state.todos.map(
                                     todo =>
-                                    <tr>
+                                    <tr key={todo.id}>
                                         <td>{todo.name}</td>
                                         <td>{todo.email}</td>
                                         <td><button onClick={() => this.updateTodoClicked(todo.id)} className="button">Update</button></td>
+                                        <td><button onClick={() => this.deleteTodoClicked(todo.id)} className="button">Delete</button></td>
                                         
 
                                     </tr>
@@ -70,4 +89,4 @@ class ItemsComponent extends React.Component {
     }
 }
 
-export default ItemsComponent
+export default withRouter(ItemListComponent)
