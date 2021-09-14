@@ -63,3 +63,22 @@ th, td, tr{
   margin-top: 5px;
   
 }
+
+.top {
+  margin: 50px;
+}
+
+.form-group {
+  border: none;
+}
+
+.btn {
+  background-color: green;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  width: 80px;
+  height: 30px;
+  margin-top: 5px;
+
+}
